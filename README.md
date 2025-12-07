@@ -1,16 +1,43 @@
-# queue_theory
+# Queues-Systems
 
-A new Flutter project.
+A multi-platform project (Android / Web / Desktop) for modeling and simulating queueing systems.
+
+## Project Overview
+
+Queues-Systems is a comprehensive project that aims to implement and simulate queueing systems across different platforms — Android, Desktop (Windows), and Web. It can be used as a tool for studying queueing theory, testing different queue configurations, or integrating queue behavior into applications.
+
+## Project Structure
+Queues-Systems/
+  ├── android/          
+  ├── web/              
+  ├── windows/         
+  ├── lib/           
+  ├── test/          
+  ├── .gitignore  
+  ├── pubspec.yaml       
+  └── README.md       
+
+## Features
+
+- Implementation of core queueing logic in a shared library (`lib/`)  
+- Platform-specific frontends / wrappers:  
+  - Android app  
+  - Windows desktop build  
+  - Web frontend  
+- Configurable queue parameters (e.g. arrival rate, service rate, queue discipline)  
+- Support for simulation and analysis queue management  
+
+## Supported Platforms
+
+- Android (mobile)  
+- Windows (desktop)  
+- Web (browser)  
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites / Requirements
 
-A few resources to get you started if this is your first Flutter project:
+-  Dart and Flutter environment (depending on which platform you build)  
+- For Android: Android SDK / NDK + Android Studio (or equivalent)  
+- For Web: a capable web server or static hosting (if using a web frontend)  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
