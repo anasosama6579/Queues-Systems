@@ -1,11 +1,12 @@
+import 'package:Queue_Systems/charts/customer_arrives_chart.dart';
+import 'package:Queue_Systems/charts/customer_number_chart.dart';
+import 'package:Queue_Systems/charts/served_customer_chart.dart';
+import 'package:Queue_Systems/function/Deterministic%20System/calculate_n_t.dart';
+import 'package:Queue_Systems/main.dart';
+import 'package:Queue_Systems/models/system_info.dart';
+import 'package:Queue_Systems/widget/custom_elevated_button.dart';
+import 'package:Queue_Systems/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:tune/function/calculate_n_t.dart';
-import 'package:tune/widget/custom_elevated_button.dart';
-import 'package:tune/widget/custom_text_field.dart';
-import 'package:tune/charts/customer_arrives_chart.dart';
-import 'package:tune/charts/customer_number_chart.dart';
-import 'package:tune/models/system_info.dart';
-import 'package:tune/charts/served_customer_chart.dart';
 
 class LambdaGraterThanMuWithoutBulking extends StatefulWidget {
   const LambdaGraterThanMuWithoutBulking({super.key});
@@ -38,7 +39,7 @@ class _LambdaGraterThanMuWithoutBulkingState
                 Expanded(
                   flex: 2,
                   child: correctInput ? CustomerArrivesChart(
-                    info: SystemInfo(
+                    info: DeterministicSystemInfo(
                         lambda: lambda, mu: mu, time: time, k: 0,m: 0),
                   ): Center(
                     child: Text(
@@ -52,7 +53,7 @@ class _LambdaGraterThanMuWithoutBulkingState
                 Expanded(
                   flex: 2,
                   child: correctInput ? ServedCustomerChart(
-                    info: SystemInfo(
+                    info: DeterministicSystemInfo(
                       lambda: lambda,
                       mu: mu,
                       time: time,
@@ -64,7 +65,7 @@ class _LambdaGraterThanMuWithoutBulkingState
                 Expanded(
                   flex: 3,
                   child: correctInput ? CustomerNumberChart(
-                    info: SystemInfo(
+                    info: DeterministicSystemInfo(
                       lambda: lambda,
                       mu: mu,
                       time: time,

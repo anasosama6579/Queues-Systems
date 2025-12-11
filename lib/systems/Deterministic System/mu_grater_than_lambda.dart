@@ -1,11 +1,12 @@
+import 'package:Queue_Systems/charts/customer_arrives_chart.dart';
+import 'package:Queue_Systems/charts/new_customer_number.dart';
+import 'package:Queue_Systems/charts/new_served_customers_chart.dart';
+import 'package:Queue_Systems/main.dart';
+import 'package:Queue_Systems/models/system_info.dart';
+import 'package:Queue_Systems/widget/custom_elevated_button.dart';
+import 'package:Queue_Systems/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:tune/charts/customer_arrives_chart.dart';
-import 'package:tune/charts/new_customer_number.dart';
-import 'package:tune/charts/new_served_customers_chart.dart';
-import 'package:tune/function/calculate_n_t.dart';
-import 'package:tune/models/system_info.dart';
-import 'package:tune/widget/custom_elevated_button.dart';
-import 'package:tune/widget/custom_text_field.dart';
+
 
 class MuGraterThanLambda extends StatefulWidget {
   const MuGraterThanLambda({super.key});
@@ -43,7 +44,7 @@ class _MuGraterThanLambdaState extends State<MuGraterThanLambda> {
                   flex: 2,
                   child: correctInput
                       ? CustomerArrivesChart(
-                          info: SystemInfo(
+                          info: DeterministicSystemInfo(
                             lambda: lambda,
                             mu: mu,
                             time: time,
@@ -63,7 +64,7 @@ class _MuGraterThanLambdaState extends State<MuGraterThanLambda> {
                   flex: 2,
                   child: correctInput
                       ? NewServedCustomersChart(
-                          info: SystemInfo(
+                          info: DeterministicSystemInfo(
                             lambda: lambda,
                             mu: mu,
                             time: time,
@@ -77,7 +78,7 @@ class _MuGraterThanLambdaState extends State<MuGraterThanLambda> {
                   flex: 3,
                   child: correctInput
                       ? NewCustomerNumberChart(
-                          info: SystemInfo(
+                          info: DeterministicSystemInfo(
                             lambda: lambda,
                             mu: mu,
                             time: time,

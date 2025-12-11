@@ -1,8 +1,7 @@
+import 'package:Queue_Systems/systems/deterministic_system.dart';
+import 'package:Queue_Systems/systems/stochastic_system.dart';
+import 'package:Queue_Systems/widget/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
-import 'package:tune/systems/lambda_grater_than_mu_with_bulking.dart';
-import 'package:tune/systems/lambda_grater_than_mu_without_bulking.dart';
-import 'package:tune/systems/mu_grater_than_lambda.dart';
-import 'package:tune/widget/custom_elevated_button.dart';
 
 class ChooseSystem extends StatelessWidget {
   const ChooseSystem({super.key});
@@ -13,53 +12,38 @@ class ChooseSystem extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
-            Text(
+            const Text(
               "Choose a D/D/1/K-1 system",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             CustomElevatedButton(
               onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LambdaGraterThanMuWithoutBulking(),
-                  ),
-                );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DeterministicSystem(),
+                    ));
               },
-              text: "λ > μ Without Bulking",
+              text: "Deterministic System",
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             CustomElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LambdaGraterThanMuWithBulking(),
-                    ),
-                  );
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StochasticSystem(),
+                      ));
                 },
-                text: "λ > μ With Bulking"),
-            SizedBox(
-              height: 20,
-            ),
-            CustomElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MuGraterThanLambda(),
-                    ),
-                  );
-                },
-                text: "μ > λ "),
+                text: "Stochastic System"),
           ],
         ),
       ),

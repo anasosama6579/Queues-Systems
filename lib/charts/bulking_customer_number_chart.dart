@@ -1,11 +1,11 @@
+import 'package:Queue_Systems/models/system_info.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:tune/models/system_info.dart';
 
 class BulkingCustomerNumberChart extends StatelessWidget {
   const BulkingCustomerNumberChart({super.key, required this.info});
 
-  final SystemInfo info;
+  final DeterministicSystemInfo info;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class BulkingCustomerNumberChart extends StatelessWidget {
       body: LineChart(
         LineChartData(
           maxX: info.time,
-          maxY: info.k == 0? 5 : info.k,
+          maxY: info.k == 0 ? 5 : info.k,
           minX: 0,
           minY: 0,
           borderData: FlBorderData(border: Border.all(color: Colors.black)),
@@ -37,7 +37,7 @@ class BulkingCustomerNumberChart extends StatelessWidget {
                         lambda: 1 / info.lambda,
                         mu: 1 / info.mu,
                         time: info.time,
-                        maxCustomers: info.k-1,
+                        maxCustomers: info.k - 1,
                       ),
               ),
             ),
@@ -56,7 +56,8 @@ List<FlSpot> customerNumberList({required List<Map<String, dynamic>> spots}) {
   return flSpots;
 }
 
-List<double> getXSpots({required double lambda, required double mu, required double time}) {
+List<double> getXSpots(
+    {required double lambda, required double mu, required double time}) {
   final Set<double> xSpots = {};
   for (int i = 1; i <= time / lambda; i++) {
     final double arrival = lambda * i;
@@ -69,7 +70,11 @@ List<double> getXSpots({required double lambda, required double mu, required dou
   return result;
 }
 
-List<Map<String, dynamic>> spots({required double lambda, required double mu, required double time, required double maxCustomers}) {
+List<Map<String, dynamic>> spots(
+    {required double lambda,
+    required double mu,
+    required double time,
+    required double maxCustomers}) {
   List<double> xSpots = getXSpots(lambda: lambda, mu: mu, time: time);
   List<Map<String, dynamic>> spotsList = [
     {'isArrival': false, 'isServed': false, 'xSpot': 0.0, 'ySpot': 0.0}
@@ -113,15 +118,18 @@ List<Map<String, dynamic>> spots({required double lambda, required double mu, re
   return spotsList;
 }
 
-double findTheFirstBulkedCustomerTime({required double lambda, required double mu, required double k, required double time,}) {
+double findTheFirstBulkedCustomerTime({
+  required double lambda,
+  required double mu,
+  required double k,
+  required double time,
+}) {
   List<double> xSpots = getXSpots(lambda: lambda, mu: mu, time: time);
   int ySpot = 0;
   for (var xSpot in xSpots) {
     if (xSpot % lambda == 0) ySpot++;
     if ((xSpot - lambda) % mu == 0 && (xSpot - lambda) / mu != 0) ySpot--;
-    if (ySpot > k-1) return xSpot;
-
+    if (ySpot > k - 1) return xSpot;
   }
   return -1;
-
 }

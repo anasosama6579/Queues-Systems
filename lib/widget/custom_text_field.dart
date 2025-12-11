@@ -10,12 +10,13 @@ class CustomTextField extends StatelessWidget {
       onChanged: onSubmitted,
       keyboardType: TextInputType.number,
       cursorColor: Colors.black,
+      style: TextStyle(fontSize: 24),
       decoration: InputDecoration(
           border: OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(),
           focusedBorder: OutlineInputBorder(),
           prefixIcon: Padding(
-            padding: const EdgeInsets.only(left: 8.0),
+            padding: const EdgeInsets.only(left: 8.0,top: 2),
             child: Text(unicodeSymbol,style: TextStyle(fontSize: 24),),
           )
       ),
