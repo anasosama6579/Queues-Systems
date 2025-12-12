@@ -2,8 +2,8 @@ import 'package:Queue_Systems/models/system_info.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class NewServedCustomersChart extends StatelessWidget {
-  const NewServedCustomersChart({super.key, required this.info});
+class ServedCustomersWithInitialChart extends StatelessWidget {
+  const ServedCustomersWithInitialChart({super.key, required this.info});
 
   final DeterministicSystemInfo info;
 
@@ -62,14 +62,14 @@ List<FlSpot> _servedArrowSpots({required double mu, required double lambda, requ
 
 List<double> getXSpots({required double mu, required double lamda, required double time, required double m, required List<double> arrivesXs}) {
   List<double> xs = [];
-  for (double i = 1; i <= m; i++) {
+  for (double i = 0; i <= m; i++) {
     xs.add(i * mu);
   }
   int counter = 0;
   for (double i = 1; i <= time; i++) {
     if (arrivesXs[counter] < (i + m) * mu) {
       if ((i + m) * mu <= time) {
-        xs.add((i + m) * mu);
+        xs.add((i + m-mu) *mu);
       }
       counter++;
     }

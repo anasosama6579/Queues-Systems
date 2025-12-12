@@ -2,8 +2,8 @@ import 'package:Queue_Systems/models/system_info.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class NewCustomerNumberChart extends StatelessWidget {
-  const NewCustomerNumberChart({super.key, required this.info});
+class CustomerNumberWithInitial extends StatelessWidget {
+  const CustomerNumberWithInitial({super.key, required this.info});
 
   final DeterministicSystemInfo info;
 

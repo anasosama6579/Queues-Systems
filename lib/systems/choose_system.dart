@@ -16,7 +16,7 @@ class ChooseSystem extends StatelessWidget {
               height: 40,
             ),
             const Text(
-              "Choose a D/D/1/K-1 system",
+              "Choose a system",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
             ),
             const SizedBox(

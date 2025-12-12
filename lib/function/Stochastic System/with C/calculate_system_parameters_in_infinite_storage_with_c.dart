@@ -19,7 +19,30 @@ double calculateExpectedNumberOfCustomerInTheQueueWithC(StochasticSystemInfo inf
   final bracketTerm = numerator / denominator;
   final Lq = bracketTerm * p0;
   return Lq.toStringAsFixed(6).toFractionDouble();
-} //?
+} //! Lq
+
+double calculateExpectedNumberOfCustomerInTheSystemWithC(StochasticSystemInfo info){
+  double Lq = calculateExpectedNumberOfCustomerInTheQueueWithC(info);
+  double r = info.lambda / info.mu;
+  double L = Lq + r;
+  return L.toStringAsFixed(6).toFractionDouble();
+} //! L
+
+double calculateExpectedWaitingTimeInTheSystemWithC(StochasticSystemInfo info){
+  double Lq = calculateExpectedNumberOfCustomerInTheQueueWithC(info);
+  double lambda = info.lambda;
+  double mu = info.mu;
+  double W = (Lq/lambda) + (1/mu);
+  return W.toStringAsFixed(6).toFractionDouble();
+} //! W
+
+double calculateExpectedWaitingTimeInTheQueueWithC(StochasticSystemInfo info) {
+  double Lq = calculateExpectedNumberOfCustomerInTheQueueWithC(info);
+  double lambda = info.lambda;
+  double Wq = Lq/lambda;
+  return Wq.toStringAsFixed(6).toFractionDouble();
+} //!Wq
+
 double calculateP0(double lambda, double mu, int c) {
   final r = lambda / mu;
   final rho = r / c;
@@ -43,27 +66,4 @@ int factorial(int n) {
     result *= i;
   }
   return result;
-}
-
-
-double calculateExpectedNumberOfCustomerInTheSystemWithC(StochasticSystemInfo info){
-  double Lq = calculateExpectedNumberOfCustomerInTheQueueWithC(info);
-  double r = info.lambda / info.mu;
-  double L = Lq + r;
-  return L.toStringAsFixed(6).toFractionDouble();
-}
-
-double calculateExpectedWaitingTimeInTheSystemWithC(StochasticSystemInfo info){
-  double Lq = calculateExpectedNumberOfCustomerInTheQueueWithC(info);
-  double lambda = info.lambda;
-  double mu = info.mu;
-  double W = (Lq/lambda) + (1/mu);
-  return W.toStringAsFixed(6).toFractionDouble();
-}
-
-double calculateExpectedWaitingTimeInTheQueueWithC(StochasticSystemInfo info) {
-  double Lq = calculateExpectedNumberOfCustomerInTheQueueWithC(info);
-  double lambda = info.lambda;
-  double Wq = Lq/lambda;
-  return Wq.toStringAsFixed(6).toFractionDouble();
 }

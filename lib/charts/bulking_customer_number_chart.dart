@@ -56,8 +56,7 @@ List<FlSpot> customerNumberList({required List<Map<String, dynamic>> spots}) {
   return flSpots;
 }
 
-List<double> getXSpots(
-    {required double lambda, required double mu, required double time}) {
+List<double> getXSpots({required double lambda, required double mu, required double time}) {
   final Set<double> xSpots = {};
   for (int i = 1; i <= time / lambda; i++) {
     final double arrival = lambda * i;

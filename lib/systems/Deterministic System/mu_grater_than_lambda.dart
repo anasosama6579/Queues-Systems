@@ -1,6 +1,6 @@
 import 'package:Queue_Systems/charts/customer_arrives_chart.dart';
-import 'package:Queue_Systems/charts/new_customer_number.dart';
-import 'package:Queue_Systems/charts/new_served_customers_chart.dart';
+import 'package:Queue_Systems/charts/customer_number_with_initial.dart';
+import 'package:Queue_Systems/charts/served_customers_with_initial_chart.dart';
 import 'package:Queue_Systems/main.dart';
 import 'package:Queue_Systems/models/system_info.dart';
 import 'package:Queue_Systems/widget/custom_elevated_button.dart';
@@ -54,7 +54,7 @@ class _MuGraterThanLambdaState extends State<MuGraterThanLambda> {
                         )
                       : Center(
                           child: Text(
-                            "Please enter valid inputs: \u03BC must be grater than \u03BB",
+                            "Please enter valid inputs:",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w600),
                           ),
@@ -63,7 +63,7 @@ class _MuGraterThanLambdaState extends State<MuGraterThanLambda> {
                 Expanded(
                   flex: 2,
                   child: correctInput
-                      ? NewServedCustomersChart(
+                      ? ServedCustomersWithInitialChart(
                           info: DeterministicSystemInfo(
                             lambda: lambda,
                             mu: mu,
@@ -77,7 +77,7 @@ class _MuGraterThanLambdaState extends State<MuGraterThanLambda> {
                 Expanded(
                   flex: 3,
                   child: correctInput
-                      ? NewCustomerNumberChart(
+                      ? CustomerNumberWithInitial(
                           info: DeterministicSystemInfo(
                             lambda: lambda,
                             mu: mu,

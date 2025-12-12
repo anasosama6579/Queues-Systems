@@ -61,7 +61,7 @@ class DeterministicSystem extends StatelessWidget {
                     ),
                   );
                 },
-                text: "μ > λ "),
+                text: "μ > λ with Initial Customers"),
           ],
         ),
       ),

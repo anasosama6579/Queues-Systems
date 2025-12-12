@@ -13,7 +13,6 @@ int factorial(int n) {
   return result;
 }
 
-
 double calculateP0(double lambda, double mu, int c, int K) {
   final r = lambda / mu;
   final rho = r / c;
@@ -33,7 +32,6 @@ double calculateP0(double lambda, double mu, int c, int K) {
 }
 
 
-
 double calculatePK(double lambda, double mu, int c, int K) {
   final r = lambda / mu;
   final rho = r / c;
@@ -48,12 +46,10 @@ double calculatePK(double lambda, double mu, int c, int K) {
   return pk;
 }
 
-
 double calculateEffectiveArrivalRate(double lambda, double mu, int c, int K) {
   final pk = calculatePK(lambda, mu, c, K);
   return lambda * (1.0 - pk);
 }
-
 
 double calculateExpectedNumberOfCustomerInTheQueueWithFiniteSystemWithC(StochasticSystemInfo info) {
   final lambda = info.lambda;
@@ -97,7 +93,6 @@ double calculateExpectedNumberOfCustomerInTheQueueWithFiniteSystemWithC(Stochast
 
   return Lq.toStringAsFixed(6).toFractionDouble();
 }
-
 
 double calculateExpectedNumberOfCustomerInTheSystemWithFiniteSystemWithC(StochasticSystemInfo info) {
   final lambda = info.lambda;
