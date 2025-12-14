@@ -37,7 +37,7 @@ class BulkingCustomerNumberChart extends StatelessWidget {
                         lambda: 1 / info.lambda,
                         mu: 1 / info.mu,
                         time: info.time,
-                        maxCustomers: info.k - 1,
+                        maxCustomers: info.k! - 1,
                       ),
               ),
             ),

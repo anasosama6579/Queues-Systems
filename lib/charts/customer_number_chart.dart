@@ -1,3 +1,4 @@
+import 'package:Queue_Systems/function/Deterministic%20System/calculate_n_t.dart';
 import 'package:Queue_Systems/models/system_info.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -11,38 +12,40 @@ class CustomerNumberChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: LineChart(
-        LineChartData(
-          maxX: info.time,
-          maxY: info.k,
-          minX: 0,
-          minY: 0,
-          borderData: FlBorderData(border: Border.all(color: Colors.black)),
-          gridData: FlGridData(
-            show: true,
-            getDrawingHorizontalLine: (value) =>
-                FlLine(color: Colors.grey[400], strokeWidth: 0.5),
-            getDrawingVerticalLine: (value) =>
-                FlLine(color: Colors.grey[400], strokeWidth: 0.5),
-          ),
-          lineBarsData: [
-            LineChartBarData(
-              color: Colors.red,
-              barWidth: 2,
-              isStepLineChart: true,
-              lineChartStepData: LineChartStepData(stepDirection: 0),
-              spots: customerNumberList(
-                spots: info.lambda == 0
-                    ? []
-                    : spots(
-                        lambda: 1 / info.lambda,
-                        mu: 1 / info.mu,
-                        time: info.time,
-                      ),
-              ),
-            ),
-          ],
-        ),
+          LineChartData(
+              maxX: info.time,
+              maxY: info.lambda == 0
+                  ? 5
+                  : calculateN(lambda: info.lambda, mu: info.mu, t: info.time) + 1,
+              minX: 0,
+              minY: 0,
+              borderData: FlBorderData(border: Border.all(color: Colors.black)),
+      gridData: FlGridData(
+        show: true,
+        getDrawingHorizontalLine: (value) =>
+            FlLine(color: Colors.grey[400], strokeWidth: 0.5),
+        getDrawingVerticalLine: (value) =>
+            FlLine(color: Colors.grey[400], strokeWidth: 0.5),
       ),
+      lineBarsData: [
+        LineChartBarData(
+          color: Colors.red,
+          barWidth: 2,
+          isStepLineChart: true,
+          lineChartStepData: LineChartStepData(stepDirection: 0),
+          spots: customerNumberList(
+            spots: info.lambda == 0
+                ? []
+                : spots(
+              lambda: 1 / info.lambda,
+              mu: 1 / info.mu,
+              time: info.time,
+            ),
+          ),
+        ),
+      ],
+    ),)
+    ,
     );
   }
 }
@@ -55,7 +58,8 @@ List<FlSpot> customerNumberList({required List<Map<String, dynamic>> spots}) {
   return flSpots;
 }
 
-List<double> getXSpots({required double lambda, required double mu, required double time}) {
+List<double> getXSpots(
+    {required double lambda, required double mu, required double time}) {
   final Set<double> xSpots = {};
   for (int i = 1; i <= time / lambda; i++) {
     final double arrival = lambda * i;
@@ -64,11 +68,13 @@ List<double> getXSpots({required double lambda, required double mu, required dou
     if (arrival < time) xSpots.add(arrival);
     if (service < time) xSpots.add(service);
   }
-  final result = xSpots.toList()..sort();
+  final result = xSpots.toList()
+    ..sort();
   return result;
 }
 
-List<Map<String, dynamic>> spots({required double lambda, required double mu, required double time}) {
+List<Map<String, dynamic>> spots(
+    {required double lambda, required double mu, required double time}) {
   List<double> xSpots = getXSpots(lambda: lambda, mu: mu, time: time);
   List<Map<String, dynamic>> spots = [
     {'isArrival': false, 'isServed': false, 'xSpot': 0.0, 'ySpot': 0.0}

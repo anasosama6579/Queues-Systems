@@ -1,9 +1,9 @@
 class DeterministicSystemInfo {
-  final double lambda;
-  final double mu;
-  final double time;
-  final double k;
-  final double m;
+   double lambda;
+   double mu;
+   double time;
+   double? k;
+   double? m;
 
   DeterministicSystemInfo(
       {required this.lambda,

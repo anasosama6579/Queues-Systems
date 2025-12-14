@@ -5,6 +5,7 @@ import 'package:Queue_Systems/main.dart';
 import 'package:Queue_Systems/models/system_info.dart';
 import 'package:Queue_Systems/widget/custom_elevated_button.dart';
 import 'package:Queue_Systems/widget/custom_text_field.dart';
+import 'package:Queue_Systems/widget/invalid_input.dart';
 import 'package:flutter/material.dart';
 
 class LambdaGraterThanMuWithBulking extends StatefulWidget {
@@ -17,10 +18,8 @@ class LambdaGraterThanMuWithBulking extends StatefulWidget {
 
 class _LambdaGraterThanMuWithBulkingState
     extends State<LambdaGraterThanMuWithBulking> {
-  double lambda = 0;
-  double mu = 0;
-  double time = 0;
-  double k = 0;
+  DeterministicSystemInfo info =
+      DeterministicSystemInfo(lambda: 0, mu: 0, time: 0, k: 0, m: 0);
   double bulkingTime = 0;
   bool correctInput = true;
 
@@ -38,52 +37,16 @@ class _LambdaGraterThanMuWithBulkingState
         children: [
           Expanded(
             flex: 3,
-            child: Column(
+            child:correctInput? Column(
               children: [
-                Expanded(
-                  flex: 2,
-                  child: correctInput
-                      ? CustomerArrivesChart(
-                          info: DeterministicSystemInfo(
-                            lambda: lambda,
-                            mu: mu,
-                            time: time,
-                            k: k,
-                            m: 0,
-                          ),
-                        )
-                      : Center(
-                          child: Text(
-                            "Please enter valid inputs: \u03BB must be grater than \u03BC",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w600),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: correctInput
-                      ? ServedCustomerChart(
-                          info: DeterministicSystemInfo(
-                              lambda: lambda, mu: mu, time: time, k: k, m: 0),
-                        )
-                      : Container(),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: correctInput
-                      ? BulkingCustomerNumberChart(
-                          info: DeterministicSystemInfo(
-                              lambda: lambda, mu: mu, time: time, k: k, m: 0),
-                        )
-                      : Container(),
-                ),
+                Expanded(flex: 2, child: CustomerArrivesChart(info: info)),
+                Expanded(flex: 2, child: ServedCustomerChart(info: info)),
+                Expanded(flex: 3, child: BulkingCustomerNumberChart(info: info)),
                 SizedBox(
                   height: 20,
                 ),
               ],
-            ),
+            ): InvalidInput()
           ),
           Expanded(
             flex: 1,
@@ -97,40 +60,43 @@ class _LambdaGraterThanMuWithBulkingState
                   CustomTextField(
                       unicodeSymbol: "\u03BB = ",
                       onSubmitted: (value) =>
-                          lambda = value.toFractionDouble()),
+                          info.lambda = value.toFractionDouble()),
                   SizedBox(
                     height: 15,
                   ),
                   CustomTextField(
                       unicodeSymbol: "\u03BC = ",
-                      onSubmitted: (value) => mu = value.toFractionDouble()),
+                      onSubmitted: (value) =>
+                          info.mu = value.toFractionDouble()),
                   SizedBox(
                     height: 15,
                   ),
                   CustomTextField(
                       unicodeSymbol: "t = ",
-                      onSubmitted: (value) => time = value.toFractionDouble()),
+                      onSubmitted: (value) =>
+                          info.time = value.toFractionDouble()),
                   SizedBox(
                     height: 15,
                   ),
                   CustomTextField(
                       unicodeSymbol: "K = ",
-                      onSubmitted: (value) => k = value.toFractionDouble()),
+                      onSubmitted: (value) =>
+                          info.k = value.toFractionDouble()),
                   SizedBox(
                     height: 15,
                   ),
                   CustomElevatedButton(
                     onPressed: () => setState(() {
-                      correctInput = (lambda > 0 &&
-                          mu > 0 &&
-                          time >= 0 &&
-                          k > 0 &&
-                          lambda > mu);
+                      correctInput = (info.lambda > 0 &&
+                          info.mu > 0 &&
+                          info.time >= 0 &&
+                          info.k! > 0 &&
+                          info.lambda > info.mu);
                       bulkingTime = findTheFirstBulkedCustomerTime(
-                        lambda: 1 / lambda,
-                        mu: 1 / mu,
-                        k: k,
-                        time: time,
+                        lambda: 1 / info.lambda,
+                        mu: 1 / info.mu,
+                        k: info.k!,
+                        time: info.time,
                       );
                     }),
                     text: "Sketch",
@@ -138,7 +104,7 @@ class _LambdaGraterThanMuWithBulkingState
                   SizedBox(
                     height: 40,
                   ),
-                  if (bulkingTime == 0)
+                  if (bulkingTime == 0 || correctInput == false)
                     SizedBox.shrink()
                   else if (bulkingTime == -1)
                     Text(

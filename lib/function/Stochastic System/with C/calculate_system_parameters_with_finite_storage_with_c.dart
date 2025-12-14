@@ -67,26 +67,21 @@ double calculateExpectedNumberOfCustomerInTheQueueWithFiniteSystemWithC(Stochast
 
   double Lq;
 
-  // Check for the special case ρ = 1
   if ((rho - 1.0).abs() < 1e-9) {
-    // Lq for ρ = 1: P0 * (r^c / c!) * ( (K-c) * (K-c+1) / 2 )
     final term1 = pow(r, c) / factorial(c);
     final term2 = (K - c) * (K - c + 1) / 2.0;
     Lq = p0 * term1 * term2;
   } else {
-    // General case for ρ ≠ 1 (from image):
-    // Lq = (ρ * r^c * p0) / (c! * (1 - ρ)^2) * [1 - ρ^(K-c+1) - (1-ρ)(K-c+1)ρ^(K-c)]
 
     final term1 = (rho * pow(r, c) * p0) / (factorial(c) * pow(1.0 - rho, 2));
 
-    // Term in the brackets [ ... ]
-    final K_minus_c_plus_1 = K - c + 1;
-    final power_K_c = pow(rho, K - c);
+    final kMinusCPlus1 = K - c + 1;
+    final powerKC = pow(rho, K - c);
 
     final termInBrackets =
         1.0 -
-            pow(rho, K_minus_c_plus_1) -
-            (1.0 - rho) * K_minus_c_plus_1 * power_K_c;
+            pow(rho, kMinusCPlus1) -
+            (1.0 - rho) * kMinusCPlus1 * powerKC;
 
     Lq = term1 * termInBrackets;
   }

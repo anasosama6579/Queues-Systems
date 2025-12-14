@@ -29,7 +29,7 @@ double calculatePSubK(StochasticSystemInfo info){
   }
   else{
     double rhoPowK = pow(rho, k!).toDouble();
-    double rhoPowKPlus1 = pow(rho, k!+1).toDouble();
+    double rhoPowKPlus1 = pow(rho, k+1).toDouble();
     double oneMinusRho = 1-rho;
 
     return (rhoPowK*(oneMinusRho/(1-rhoPowKPlus1))).toStringAsFixed(5).toFractionDouble();

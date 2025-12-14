@@ -25,7 +25,7 @@ extension SignificantDigitsExtension on double {
     if (this == 0) return 0;
 
     final double scale =
-    pow(10, digits - 1 - (log(this.abs()) / ln10).floor()).toDouble();
+    pow(10, digits - 1 - (log(abs()) / ln10).floor()).toDouble();
 
     return (this * scale).round() / scale;
   }

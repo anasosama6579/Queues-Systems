@@ -13,7 +13,7 @@ class CustomerNumberWithInitial extends StatelessWidget {
       body: LineChart(
         LineChartData(
           maxX: info.time,
-          maxY: info.m == 0 ? 5 :info.m+1,
+          maxY: info.m == 0 ? 5 :info.m!+1,
           minX: 0,
           minY: 0,
           borderData: FlBorderData(border: Border.all(color: Colors.black)),
@@ -32,7 +32,7 @@ class CustomerNumberWithInitial extends StatelessWidget {
               lineChartStepData: LineChartStepData(stepDirection: 0),
               spots: info.lambda == 0
                   ? []
-                  : customerNumberList(mu: 1/info.mu, lambda: 1/info.lambda, time: info.time, m: info.m),
+                  : customerNumberList(mu: 1/info.mu, lambda: 1/info.lambda, time: info.time, m: info.m!),
             ),
           ],
         ),

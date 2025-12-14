@@ -32,7 +32,7 @@ class ServedCustomersWithInitialChart extends StatelessWidget {
                   lambda: 1 / info.lambda,
                   mu: 1 / info.mu,
                   time: info.time,
-                  m: info.m,),
+                  m: info.m!,),
             ),
           ],
         ),
